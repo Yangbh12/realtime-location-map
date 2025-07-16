@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>位置上报</title>
+</head>
+<body>
+  <h2>正在上报定位中...</h2>
+  <script>
+    navigator.geolocation.watchPosition(function(position) {
+        fetch('https://your-backend.com/api/update-location', {
+            method: 'POST',
+            body: JSON.stringify({
+                lat: position.coords.latitude,
+                lng: position.coords.longitude
+            }),
+            headers: {'Content-Type': 'application/json'}
+        });
+    }, err => console.error(err), { enableHighAccuracy: true });
+  </script>
+</body>
+</html>
